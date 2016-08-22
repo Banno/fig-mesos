@@ -1,15 +1,15 @@
-#### Run Mesos in Docker with Fig!
+#### Run Mesos in Docker with Docker Compose!
 
-Assuming you've already [installed Fig](http://www.fig.sh/install.html), then checkout and run:
+Assuming you've already [installed Docker Toolbox](https://www.docker.com/docker-toolbox), then checkout and run:
 
 ```
-fig up -d
+docker-compose up -d
 ```
 
 To stream log output, simply run:
 
 ```
-fig logs
+docker-compose logs
 ```
 
 Great! Now let's pop open the Mesos, Marathon, & Chronos' UI like so:
@@ -17,7 +17,7 @@ Great! Now let's pop open the Mesos, Marathon, & Chronos' UI like so:
 ```
 open http://localdocker:5050/ # open Mesos UI
 open http://localdocker:8080/ # open Marathon UI
-open http://localdocker:8081/ # Open Chronos UI
+open http://localdocker:4400/ # Open Chronos UI
 ```
 
 Let's launch a simple app through [Marathon's REST API](https://mesosphere.github.io/marathon/docs/rest-api.html) like so:
@@ -27,8 +27,8 @@ curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" \
   localdocker:8080/v2/apps -d '
 {
     "id": "hello",
-    "cpus": "0.1",
-    "mem": "32",
+    "cpus": 0.1,
+    "mem": 32,
     "cmd": "echo hello; sleep 10"
 }'
 ```
